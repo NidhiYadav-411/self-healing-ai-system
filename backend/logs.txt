@@ -1,0 +1,5 @@
+{"event": "ANOMALY_DETECTED", "metrics": [21.4, 93.7], "time": 1776434061.8737814}
+{"event": "ANOMALY_DETECTED", "metrics": [23.6, 94.3], "time": 1776434064.0788543}
+{"event": "ANOMALY_DETECTED", "metrics": [31.9, 89.5], "time": 1776434066.2625015}
+{"event": "ANOMALY_DETECTED", "metrics": [36.5, 89.2], "time": 1776434072.664761}
+{"event": "ANOMALY_DETECTED", "metrics": [31.5, 89.3], "time": 1776434075.678824}
