@@ -3,3 +3,48 @@
 {"event": "ANOMALY_DETECTED", "metrics": [31.9, 89.5], "time": 1776434066.2625015}
 {"event": "ANOMALY_DETECTED", "metrics": [36.5, 89.2], "time": 1776434072.664761}
 {"event": "ANOMALY_DETECTED", "metrics": [31.5, 89.3], "time": 1776434075.678824}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.1544685}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 99.2, "action": "restart_simulated", "time": 1776434289.328969}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.4413557}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.4929066}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.5439186}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.665811}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.810313}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434289.9074943}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 98.1, "action": "restart_simulated", "time": 1776434290.0058663}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 83.7, "action": "restart_simulated", "time": 1776434290.7260344}
+{"event": "ANOMALY_DETECTED", "metrics": [55.7, 91.7], "time": 1776434333.1201906}
+{"event": "ANOMALY_DETECTED", "metrics": [55.7, 91.7], "time": 1776434334.742636}
+{"event": "ANOMALY_DETECTED", "metrics": [50.0, 89.7], "time": 1776434336.6936643}
+{"event": "ANOMALY_DETECTED", "metrics": [51.1, 87.9], "time": 1776434338.6999378}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434403.9987228}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434404.0246172}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 87.5, "action": "restart_simulated", "time": 1776434404.0485625}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434404.0739036}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 100.0, "action": "restart_simulated", "time": 1776434404.1214225}
+{"event": "SELF_HEAL_TRIGGERED", "cpu": 87.5, "action": "restart_simulated", "time": 1776434419.747296}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434542.7024763}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434542.735175}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434542.839826}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434542.9278805}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.1153758}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.2218692}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.343222}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.4815948}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.6120524}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.7278662}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.8711727}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434543.9504805}
+{"event": "SELF_HEAL", "cpu": 97.6, "time": 1776434544.0423157}
+{"event": "SELF_HEAL", "cpu": 89.7, "time": 1776434544.7428904}
+{"event": "SELF_HEAL", "cpu": 81.0, "time": 1776434569.3062298}
+{"event": "SELF_HEAL", "cpu": 98.1, "time": 1776434571.2718775}
+{"event": "SELF_HEAL", "cpu": 88.4, "time": 1776434572.8532467}
+{"event": "ANOMALY", "data": [65.3, 89.5], "time": 1776434851.8122618}
+{"event": "ANOMALY", "data": [57.5, 92.2], "time": 1776434893.8018935}
+{"event": "ANOMALY", "data": [79.4, 92.4], "time": 1776434898.8739858}
+{"event": "ANOMALY", "data": [65.8, 92.8], "time": 1776434904.5999048}
+{"event": "ANOMALY", "data": [93.5, 91.2], "time": 1776434913.8841295}
+{"event": "SELF_HEAL", "cpu": 84.2, "time": 1776434977.916945}
+{"event": "SELF_HEAL", "cpu": 90.9, "time": 1776434977.9567344}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434990.7491665}

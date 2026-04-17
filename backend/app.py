@@ -8,7 +8,6 @@ from sklearn.ensemble import IsolationForest
 import os
 import json
 
-# ====== INIT APP ======
 app = FastAPI()
 
 # ====== CORS ======
@@ -20,50 +19,40 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ====== GLOBAL STORAGE ======
+# ====== DATA ======
 metrics_data = []
 MAX_DATA = 100
 
-# ====== ML MODEL ======
+# ====== MODEL ======
 model = IsolationForest(contamination=0.1)
 
-# ====== LOGGING FUNCTION ======
+# ====== LOGGING ======
 def log_event(event):
     with open("logs.txt", "a") as f:
         f.write(json.dumps(event) + "\n")
 
-# ====== MONITORING FUNCTION ======
+# ====== MONITORING ======
 def collect_metrics():
     while True:
-        try:
-            cpu = psutil.cpu_percent()
-            memory = psutil.virtual_memory().percent
+        cpu = psutil.cpu_percent()
+        memory = psutil.virtual_memory().percent
 
-            data = [cpu, memory]
-            metrics_data.append(data)
+        metrics_data.append([cpu, memory])
 
-            # keep only last 100 entries
-            if len(metrics_data) > MAX_DATA:
-                metrics_data.pop(0)
+        if len(metrics_data) > MAX_DATA:
+            metrics_data.pop(0)
 
-            time.sleep(2)
+        time.sleep(2)
 
-        except Exception as e:
-            print("Monitoring error:", e)
-
-# ====== MODEL TRAINING ======
+# ====== TRAIN MODEL ======
 def train_model():
     while True:
-        try:
-            if len(metrics_data) >= 10:
-                data = np.array(metrics_data)
-                model.fit(data)
-            time.sleep(10)
+        if len(metrics_data) >= 10:
+            data = np.array(metrics_data)
+            model.fit(data)
+        time.sleep(10)
 
-        except Exception as e:
-            print("Training error:", e)
-
-# ====== START BACKGROUND THREADS ======
+# START THREADS
 threading.Thread(target=collect_metrics, daemon=True).start()
 threading.Thread(target=train_model, daemon=True).start()
 
@@ -71,71 +60,64 @@ threading.Thread(target=train_model, daemon=True).start()
 
 @app.get("/")
 def home():
-    return {"message": "AI Self-Healing System Running"}
+    return {"message": "Running"}
 
-# ====== GET METRICS ======
+# 🔥 FIXED: always return data (no blank graph)
 @app.get("/metrics")
 def get_metrics():
-    return {"data": metrics_data}
+    if len(metrics_data) == 0:
+        return {"data": []}
 
-# ====== ANOMALY DETECTION ======
+    data = np.array(metrics_data)
+
+    # Predict only if enough data
+    if len(metrics_data) >= 10:
+        preds = model.predict(data)
+    else:
+        preds = [1] * len(metrics_data)
+
+    result = []
+    for i in range(len(metrics_data)):
+        result.append({
+            "cpu": metrics_data[i][0],
+            "memory": metrics_data[i][1],
+            "anomaly": preds[i] == -1
+        })
+
+    return {"data": result}
+
 @app.get("/anomaly")
 def detect_anomaly():
     if len(metrics_data) < 10:
-        return {"status": "Not enough data"}
+        return {"anomaly": False}
 
-    try:
-        data = np.array(metrics_data)
-        preds = model.predict(data)
+    data = np.array(metrics_data)
+    preds = model.predict(data)
 
-        is_anomaly = preds[-1] == -1
+    is_anomaly = preds[-1] == -1
 
-        if is_anomaly:
-            log_event({
-                "event": "ANOMALY_DETECTED",
-                "metrics": metrics_data[-1],
-                "time": time.time()
-            })
+    if is_anomaly:
+        log_event({
+            "event": "ANOMALY",
+            "data": metrics_data[-1],
+            "time": time.time()
+        })
 
-        return {"anomaly": is_anomaly}
+    return {"anomaly": is_anomaly}
 
-    except Exception as e:
-        return {"error": str(e)}
-
-# ====== SELF-HEALING ======
 @app.get("/self-heal")
 def self_heal():
-    try:
-        cpu = psutil.cpu_percent()
+    cpu = psutil.cpu_percent()
 
-        if cpu > 80:
-            # ⚠️ SAFE SIMULATION (DO NOT actually kill processes yet)
-            os.system("echo 'Simulated restart triggered'")
+    if cpu > 80:
+        os.system("echo restart simulated")
 
-            log_event({
-                "event": "SELF_HEAL_TRIGGERED",
-                "cpu": cpu,
-                "action": "restart_simulated",
-                "time": time.time()
-            })
+        log_event({
+            "event": "SELF_HEAL",
+            "cpu": cpu,
+            "time": time.time()
+        })
 
-            return {
-                "action": "⚠️ High CPU → Restart command executed (simulated)"
-            }
+        return {"action": "⚠️ Restart triggered (simulated)"}
 
-        return {"action": "✅ System stable"}
-
-    except Exception as e:
-        return {"error": str(e)}
-
-# ====== VIEW LOGS ======
-@app.get("/logs")
-def get_logs():
-    try:
-        with open("logs.txt", "r") as f:
-            logs = f.readlines()
-
-        return {"logs": logs[-20:]}  # last 20 logs
-
-    except:
-        return {"logs": []}
+    return {"action": "✅ Stable"}
