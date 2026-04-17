@@ -48,3 +48,8 @@
 {"event": "SELF_HEAL", "cpu": 84.2, "time": 1776434977.916945}
 {"event": "SELF_HEAL", "cpu": 90.9, "time": 1776434977.9567344}
 {"event": "SELF_HEAL", "cpu": 100.0, "time": 1776434990.7491665}
+{"event": "SELF_HEAL", "cpu": 83.3, "time": 1776435370.9060876}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776435370.9431486}
+{"event": "SELF_HEAL", "cpu": 100.0, "time": 1776435370.9866734}
+{"event": "ANOMALY", "data": [70.6, 88.9], "time": 1776435395.7092605}
+{"event": "PREDICTION", "trend": [35.5, 28.6, 35.2, 45.6, 70.6], "time": 1776435395.7334208}

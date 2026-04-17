@@ -52,7 +52,6 @@ def train_model():
             model.fit(data)
         time.sleep(10)
 
-# START THREADS
 threading.Thread(target=collect_metrics, daemon=True).start()
 threading.Thread(target=train_model, daemon=True).start()
 
@@ -62,7 +61,6 @@ threading.Thread(target=train_model, daemon=True).start()
 def home():
     return {"message": "Running"}
 
-# 🔥 FIXED: always return data (no blank graph)
 @app.get("/metrics")
 def get_metrics():
     if len(metrics_data) == 0:
@@ -70,7 +68,6 @@ def get_metrics():
 
     data = np.array(metrics_data)
 
-    # Predict only if enough data
     if len(metrics_data) >= 10:
         preds = model.predict(data)
     else:
@@ -104,6 +101,29 @@ def detect_anomaly():
         })
 
     return {"anomaly": is_anomaly}
+
+# 🔥 FIXED PREDICTION LOGIC
+@app.get("/predict")
+def predict_failure():
+    if len(metrics_data) < 6:
+        return {"prediction": "Collecting data..."}
+
+    last_cpu = [m[0] for m in metrics_data[-5:]]
+
+    # simple trend: compare average
+    avg_start = sum(last_cpu[:2]) / 2
+    avg_end = sum(last_cpu[-2:]) / 2
+
+    if avg_end > avg_start + 10:  # threshold
+        log_event({
+            "event": "PREDICTION",
+            "trend": last_cpu,
+            "time": time.time()
+        })
+
+        return {"prediction": "⚠️ CPU trend increasing → Risk of failure"}
+
+    return {"prediction": "✅ System stable"}
 
 @app.get("/self-heal")
 def self_heal():
